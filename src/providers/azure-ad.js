@@ -1,12 +1,10 @@
 /** @type {import(".").OAuthProvider} */
 export default function AzureAD(options) {
-  const tenant = options.tenantId ?? "common"
-
   return {
     id: "azure-ad",
     name: "Azure Active Directory",
     type: "oauth",
-    wellKnown: `https://login.microsoftonline.com/${tenant}/v2.0/.well-known/openid-configuration`,
+    wellKnown: `${options.issuer}/v2.0/.well-known/openid-configuration`,
     authorization: {
       params: {
         scope: "User.Read",
@@ -14,6 +12,7 @@ export default function AzureAD(options) {
     },
     async profile(profile, tokens) {
       // https://docs.microsoft.com/en-us/graph/api/profilephoto-get?view=graph-rest-1.0#examples
+      console.log(profile)
       const profilePicture = await fetch(
         "https://graph.microsoft.com/v1.0/me/photo/$value",
         {
