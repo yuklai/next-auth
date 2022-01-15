@@ -43,6 +43,7 @@
     "dev": "cd app && npm run dev",
     "watch:css": "postcss --config config/postcss.config.js --watch src/**/*.css --base src --dir .",
     "test": "jest --config ./config/jest.config.js",
+    "test:cy": "start-server-and-test dev http://localhost:3000 'npx cypress open'",
     "test:ci": "npm run lint && npm run test -- --ci",
     "prepublishOnly": "npm run build",
     "lint": "eslint .",
@@ -94,6 +95,7 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
+    "@testing-library/cypress": "^8.0.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
@@ -127,6 +129,7 @@
     "pretty-quick": "^3.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "start-server-and-test": "^1.14.0",
     "typescript": "^4.5.2",
     "whatwg-fetch": "^3.6.2"
   },
@@ -141,7 +144,10 @@
     "parserOptions": {
       "project": "./tsconfig.json"
     },
-    "extends": ["standard-with-typescript", "prettier"],
+    "extends": [
+      "standard-with-typescript",
+      "prettier"
+    ],
     "ignorePatterns": [
       "node_modules",
       "next-env.d.ts",
@@ -165,12 +171,18 @@
     },
     "overrides": [
       {
-        "files": ["./**/*test.js"],
+        "files": [
+          "./**/*test.js"
+        ],
         "env": {
           "jest/globals": true
         },
-        "extends": ["plugin:jest/recommended"],
-        "plugins": ["jest"]
+        "extends": [
+          "plugin:jest/recommended"
+        ],
+        "plugins": [
+          "jest"
+        ]
       }
     ]
   },
