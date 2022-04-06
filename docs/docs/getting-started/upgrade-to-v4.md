@@ -556,6 +556,7 @@ MongoDB is a document database and as such new fields will be automatically popu
 db.getCollection('accounts').updateMany({}, {
   $rename: {
     "provider_id": "provider",
+    "providerType": "type",
     "provider_account_id": "providerAccountId",
     "user_id": "userId",
     "access_token_expires": "expires_at"
